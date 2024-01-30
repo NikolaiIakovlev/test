@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes without Product</title>
+</head>
+<body>
+    <h1>Recipes without Product</h1>
+    
+    {% if recipes_without_product %}
+        <h2>Recipes without {{ product.name }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recipes_without_product %}
+                    <tr>
+                        <td>{{ recipe.id }}</td>
+                        <td>{{ recipe.name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    {% if recipes_less_than_10g %}
+        <h2>Recipes with {{ product.name }} less than 10g</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe_id in recipes_less_than_10g %}
+                    {% with recipe=recipe_id.recipe %}
+                        <tr>
+                            <td>{{ recipe.id }}</td>
+                            <td>{{ recipe.name }}</td>
+                        </tr>
+                    {% endwith %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>
